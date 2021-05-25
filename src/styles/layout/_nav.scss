@@ -1,0 +1,40 @@
+nav {
+    height: 80px;
+    width: 100%;
+    padding: 0 1rem;
+    box-shadow: $bottom-shadow;
+    @include flex(row, flex-end, center);
+
+    div {
+        margin-left: 0.5rem;
+        cursor: pointer;
+
+        &.active {
+            color: $primary-font-color
+        }
+
+        &.cesta {
+            padding: 0.5rem;
+            border-radius: 0.3rem;
+            background-color: $primary-font-color;
+            position: relative;
+
+            img {
+                height: 26px;
+            }
+
+            .contador {
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                position: absolute;
+                top: -10px;
+                right: -10px;
+                @include flex(row, center, center);
+                font-size: 0.6rem;
+                background-color: $danger-color;
+                color: white;
+            }
+        }
+    }
+}
