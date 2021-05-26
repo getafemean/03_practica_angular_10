@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Factura } from 'src/app/models/factura.model';
 import { FacturasService } from 'src/app/servicios/facturas.service';
 import { ValidateCif } from 'src/app/validators/cif.validator';
@@ -12,14 +12,17 @@ import { ValidateCif } from 'src/app/validators/cif.validator';
 })
 export class ActualizarFacturaComponent implements OnInit {
 
+  id: string;
   formFactura: FormGroup;
   waitingResponse: boolean = false;
   user: string = 'Juan Pérez';
 
   constructor(private facturasService: FacturasService,
+              private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.params.id;
     this.formFactura = new FormGroup({
       cliente: new FormControl('', [Validators.required, Validators.minLength(4)]),
       cif: new FormControl('', [ValidateCif]),
@@ -30,6 +33,16 @@ export class ActualizarFacturaComponent implements OnInit {
       totalFactura: new FormControl(0)
     })
     this.actualizarFactura();
+    this.facturasService.getFacturaId(this.id)
+                        .subscribe((res: any) => {
+                          this.formFactura.get('cliente').patchValue(res.factura.cliente);  
+                          this.formFactura.get('cif').patchValue(res.factura.cif);  
+                          this.formFactura.get('fechaFactura').patchValue((new Date(res.factura.fechaFactura)).toISOString().substring(0,10));  
+                          this.formFactura.get('baseImponible').patchValue(res.factura.baseImponible);  
+                          this.formFactura.get('tipoIVA').patchValue(res.factura.tipoIVA);  
+                        }, (err: any) => {
+                          console.log(err);
+                        })
   }
 
   actualizarFactura() {
@@ -52,7 +65,7 @@ export class ActualizarFacturaComponent implements OnInit {
       user: this.user
     };
     this.waitingResponse = true;
-    this.facturasService.postFactura(factura)
+    this.facturasService.putFactura(this.id, factura)
                         .subscribe((res: any) => {
                           this.waitingResponse = false;
                           this.router.navigate(['/']);

@@ -10,12 +10,18 @@
                     <th>Cliente</th>
                     <th>Fecha Factura</th>
                     <th>Base Imponible</th>
+                    <th></th>
                 </tr>
                 <ng-template ngFor let-factura [ngForOf]="facturas">
                     <tr *ngIf="!waitingResponse">
                         <td>{{factura.cliente}}</td>
                         <td>{{factura.fechaFactura | date: 'dd/MM/yy'}}</td>
                         <td>{{factura.baseImponible | numero: 2: '€'}}</td>
+                        <td>
+                            <button routerLink="/actualizar-factura/{{factura.id}}">
+                                <img src="/assets/img/edit.svg" alt="">
+                            </button>
+                        </td>
                     </tr>
                 </ng-template>
                 <tr *ngIf="waitingResponse">

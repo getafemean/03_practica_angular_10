@@ -7,7 +7,7 @@ import { ListadoFacturasComponent } from './facturas/listado-facturas/listado-fa
 const routes: Routes = [
   {path: '', component: ListadoFacturasComponent},
   {path: 'crear-factura', component: CrearFacturaComponent},
-  {path: 'actualizar-factura', component: ActualizarFacturaComponent}
+  {path: 'actualizar-factura/:id', component: ActualizarFacturaComponent}
 ];
 
 @NgModule({

@@ -5,6 +5,7 @@ button {
     border: 1px solid $primary-font-color;
     background-color: $primary-font-color;
     color: white;
+    cursor: pointer;
     transition: all 400ms ease-in-out;
 
     &.outline {
