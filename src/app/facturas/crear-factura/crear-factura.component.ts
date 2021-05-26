@@ -34,7 +34,7 @@ export class CrearFacturaComponent implements OnInit {
       let borradorFra = JSON.parse(localStorage.getItem('borradorFra'));
       this.formFactura.get('cliente').setValue(borradorFra.cliente);
       this.formFactura.get('cif').setValue(borradorFra.cif);
-      this.formFactura.get('fechaFactura').setValue(borradorFra.fechaFactura);
+      this.formFactura.get('fechaFactura').setValue((new Date(borradorFra.fechaFactura)).toISOString().substring(0,10));
       this.formFactura.get('baseImponible').setValue(borradorFra.baseImponible);
       this.formFactura.get('tipoIVA').setValue(borradorFra.tipoIVA);
     }
@@ -54,7 +54,7 @@ export class CrearFacturaComponent implements OnInit {
     let factura: Factura = {
       cliente: this.formFactura.get('cliente').value,
       cif: this.formFactura.get('cif').value,
-      fechaFactura: this.formFactura.get('fechaFactura').value,
+      fechaFactura: new Date(this.formFactura.get('fechaFactura').value),
       baseImponible: this.formFactura.get('baseImponible').value,
       tipoIVA: this.formFactura.get('tipoIVA').value,
       user: this.user
@@ -63,6 +63,7 @@ export class CrearFacturaComponent implements OnInit {
     this.facturasService.postFactura(factura)
                         .subscribe((res: any) => {
                           this.waitingResponse = false;
+                          localStorage.removeItem('borradorFra');
                           this.router.navigate(['/']);
                         }, (err: any) => {
                           console.log(err);
@@ -73,7 +74,7 @@ export class CrearFacturaComponent implements OnInit {
     let factura: Factura = {
       cliente: this.formFactura.get('cliente').value,
       cif: this.formFactura.get('cif').value,
-      fechaFactura: this.formFactura.get('fechaFactura').value,
+      fechaFactura: new Date(this.formFactura.get('fechaFactura').value),
       baseImponible: this.formFactura.get('baseImponible').value,
       tipoIVA: this.formFactura.get('tipoIVA').value,
       user: this.user
