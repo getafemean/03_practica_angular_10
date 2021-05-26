@@ -18,8 +18,11 @@
                         <td>{{factura.fechaFactura | date: 'dd/MM/yy'}}</td>
                         <td>{{factura.baseImponible | numero: 2: '€'}}</td>
                         <td>
-                            <button routerLink="/actualizar-factura/{{factura.id}}">
+                            <button class="warning" routerLink="/actualizar-factura/{{factura.id}}">
                                 <img src="/assets/img/edit.svg" alt="">
+                            </button>
+                            <button class="m-l-small danger" (click)="deleteFactura(factura.id)">
+                                <img src="/assets/img/trash.svg" alt="">
                             </button>
                         </td>
                     </tr>

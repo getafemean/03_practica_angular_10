@@ -16,10 +16,23 @@ export class ListadoFacturasComponent implements OnInit {
 
   ngOnInit(): void {
     this.waitingResponse = true;
+    this.loadFacturas();
+  }
+
+  loadFacturas() {
     this.facturasService.getFacturas()
                         .subscribe((res: any) => {
                           this.waitingResponse = false;
                           this.facturas = res.facturas;
+                        }, (err: any) => {
+                          console.log(err);
+                        })
+  }
+
+  deleteFactura(id: string) {
+    this.facturasService.deleteFactura(id)
+                        .subscribe((res: any) => {
+                          this.loadFacturas();
                         }, (err: any) => {
                           console.log(err);
                         })
