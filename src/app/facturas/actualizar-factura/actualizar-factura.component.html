@@ -1,0 +1,87 @@
+<div class="container show">
+    <div class="row">
+        <div class="col-100">
+            <form [formGroup]="formFactura" (ngSubmit)="updateFactura()">
+                <h1>Ejemplo de formulario reactive forms</h1>
+                <div class="row">
+                    <div class="col-100">   
+                        <label>
+                            Cliente
+                            <span class="success" *ngIf="formFactura.controls?.cliente?.valid">
+                                &#10004;
+                            </span>
+                            <span class="alert" *ngIf="formFactura.controls?.cliente?.errors?.required &&
+                                                       formFactura.controls?.cliente?.touched">
+                                El cliente es obligatorio
+                            </span>
+                            <span class="alert" *ngIf="formFactura.controls?.cliente?.errors?.minlength &&
+                                                       formFactura.controls?.cliente?.dirty">
+                                El cliente debe tener al menos 4 caracteres
+                            </span>
+                        </label>
+                        <input type="text" formControlName="cliente">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-50 p-r">
+                        <label>
+                            CIF
+                            <span class="success" *ngIf="formFactura.controls?.cif?.valid">
+                                &#10004;
+                            </span>
+                            <span class="alert" *ngIf="formFactura.controls?.cif?.errors?.invalidCif &&
+                                                       formFactura.controls?.cif?.dirty">
+                                {{formFactura.controls?.cif?.errors?.mensaje}}
+                            </span>
+                        </label>
+                        <input type="text" formControlName="cif" maxlength="9">
+                    </div>
+                    <div class="col-50 p-l">
+                        <label>Fecha factura</label>
+                        <input type="date" formControlName="fechaFactura">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-50"></div>
+                    <div class="col-50 p-l">
+                        <label>Base imponible</label>
+                        <input type="number" formControlName="baseImponible">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-50"></div>
+                    <div class="col-50 p-l">
+                        <label>% IVA</label>
+                        <select formControlName="tipoIVA">
+                            <option value=0>0 %</option>
+                            <option value=0.04>4 %</option>
+                            <option value=0.10>10 %</option>
+                            <option value=0.21>21 %</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-50"></div>
+                    <div class="col-50 p-l">
+                        <label>Importe IVA</label>
+                        <input type="text" formControlName="importeIVA" readonly [value]="formFactura.controls.importeIVA.value | numero: 2: '€'">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-50"></div>
+                    <div class="col-50 p-l">
+                        <label>Total Factura IVA incluido</label>
+                        <input type="text" formControlName="totalFactura" readonly [value]="formFactura.controls.totalFactura.value | numero: 2: '€'">
+                    </div>
+                </div>
+                <div class="flex j-end a-center m-t">
+                    <button type="button" class="outline" routerLink="/">Cancelar</button>
+                    <button type="submit" class="m-l-small icon" [disabled]="formFactura.invalid">
+                        <img *ngIf="waitingResponse" class="regular-rotation" src="/assets/img/loader.svg" alt="">
+                        Guardar cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

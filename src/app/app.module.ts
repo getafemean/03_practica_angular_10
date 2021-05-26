@@ -9,6 +9,7 @@ import { CrearFacturaComponent } from './facturas/crear-factura/crear-factura.co
 import { ListadoFacturasComponent } from './facturas/listado-facturas/listado-facturas.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { NumeroPipe } from './pipes/numero.pipe';
+import { ActualizarFacturaComponent } from './facturas/actualizar-factura/actualizar-factura.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NumeroPipe } from './pipes/numero.pipe';
     CrearFacturaComponent,
     ListadoFacturasComponent,
     SpinnerComponent,
-    NumeroPipe
+    NumeroPipe,
+    ActualizarFacturaComponent
   ],
   imports: [
     BrowserModule,
