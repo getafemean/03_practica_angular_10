@@ -75,9 +75,12 @@
                     </div>
                 </div>
                 <div class="flex j-end a-center m-t">
-                    <button type="button" class="outline">Cancelar</button>
+                    <button type="button" class="outline" routerLink="/">Cancelar</button>
                     <button type="button" class="outline m-l-small" (click)="guardarBorrador()">Guardar borrador</button>
-                    <button type="submit" class="m-l-small" [disabled]="formFactura.invalid">Añadir</button>
+                    <button type="submit" class="m-l-small icon" [disabled]="formFactura.invalid">
+                        <img *ngIf="waitingResponse" class="regular-rotation" src="/assets/img/loader.svg" alt="">
+                        Añadir
+                    </button>
                 </div>
             </form>
         </div>

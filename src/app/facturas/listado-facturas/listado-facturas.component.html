@@ -1,0 +1,29 @@
+<div class="container show">
+    <div class="row">
+        <div class="col-100">
+            <div class="flex j-between a-center">
+                <h1>Listado de Facturas</h1>
+                <button routerLink="/crear-factura">Crear Factura</button>
+            </div>
+            <table>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Fecha Factura</th>
+                    <th>Base Imponible</th>
+                </tr>
+                <ng-template ngFor let-factura [ngForOf]="facturas">
+                    <tr *ngIf="!waitingResponse">
+                        <td>{{factura.cliente}}</td>
+                        <td>{{factura.fechaFactura}}</td>
+                        <td>{{factura.baseImponible}}</td>
+                    </tr>
+                </ng-template>
+                <tr *ngIf="waitingResponse">
+                    <td colspan="3">
+                        <app-spinner></app-spinner>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

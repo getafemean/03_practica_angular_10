@@ -6,11 +6,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CrearFacturaComponent } from './facturas/crear-factura/crear-factura.component';
+import { ListadoFacturasComponent } from './facturas/listado-facturas/listado-facturas.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CrearFacturaComponent
+    CrearFacturaComponent,
+    ListadoFacturasComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

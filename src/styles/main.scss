@@ -1,3 +1,4 @@
+@import './abstracts/animations';
 @import './abstracts/mixins';
 @import './abstracts/variables';
 
@@ -7,6 +8,7 @@
 @import './components/buttons';
 @import './components/cards';
 @import './components/forms';
+@import './components/spinner';
 @import './components/tables';
 
 @import './layout/containers';

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Factura } from 'src/app/models/factura.model';
 import { FacturasService } from 'src/app/servicios/facturas.service';
 import { ValidateCif } from 'src/app/validators/cif.validator';
 
@@ -11,9 +13,11 @@ import { ValidateCif } from 'src/app/validators/cif.validator';
 export class CrearFacturaComponent implements OnInit {
 
   formFactura: FormGroup;
+  waitingResponse: boolean = false;
   user: string = 'Juan Pérez';
 
-  constructor(private facturasService: FacturasService) { }
+  constructor(private facturasService: FacturasService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.formFactura = new FormGroup({
@@ -47,17 +51,33 @@ export class CrearFacturaComponent implements OnInit {
   }
 
   addFactura() {
-    let factura = {...this.formFactura.value, user: this.user};
+    let factura: Factura = {
+      cliente: this.formFactura.get('cliente').value,
+      cif: this.formFactura.get('cif').value,
+      fechaFactura: this.formFactura.get('fechaFactura').value,
+      baseImponible: this.formFactura.get('baseImponible').value,
+      tipoIVA: this.formFactura.get('tipoIVA').value,
+      user: this.user
+    };
+    this.waitingResponse = true;
     this.facturasService.postFactura(factura)
                         .subscribe((res: any) => {
-                          console.log(res);
+                          this.waitingResponse = false;
+                          this.router.navigate(['/']);
                         }, (err: any) => {
                           console.log(err);
                         })
   }
 
   guardarBorrador() {
-    let factura = {...this.formFactura.value};
+    let factura: Factura = {
+      cliente: this.formFactura.get('cliente').value,
+      cif: this.formFactura.get('cif').value,
+      fechaFactura: this.formFactura.get('fechaFactura').value,
+      baseImponible: this.formFactura.get('baseImponible').value,
+      tipoIVA: this.formFactura.get('tipoIVA').value,
+      user: this.user
+    };
     localStorage.setItem('borradorFra', JSON.stringify(factura))
   }
 
