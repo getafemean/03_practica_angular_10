@@ -61,8 +61,7 @@ export class ActualizarFacturaComponent implements OnInit {
       cif: this.formFactura.get('cif').value,
       fechaFactura: new Date(this.formFactura.get('fechaFactura').value),
       baseImponible: this.formFactura.get('baseImponible').value,
-      tipoIVA: this.formFactura.get('tipoIVA').value,
-      user: this.user
+      tipoIVA: this.formFactura.get('tipoIVA').value
     };
     this.waitingResponse = true;
     this.facturasService.putFactura(this.id, factura)

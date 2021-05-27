@@ -4,6 +4,5 @@ export interface Factura {
     cif: string,
     fechaFactura: Date,
     baseImponible: number,
-    tipoIVA: number,
-    user: string
+    tipoIVA: number
 }

@@ -1,7 +1,7 @@
 <div class="container" appFadeLoad>
     <div class="row">
         <div class="col-100">
-            <form [formGroup]="formFactura" (ngSubmit)="addFactura()">
+            <form [formGroup]="formFactura">
                 <h1>Ejemplo de formulario reactive forms</h1>
                 <div class="row">
                     <div class="col-100">   
@@ -77,8 +77,11 @@
                 <div class="flex j-end a-center m-t">
                     <button type="button" class="outline" routerLink="/">Cancelar</button>
                     <button type="button" class="outline m-l-small" (click)="guardarBorrador()">Guardar borrador</button>
-                    <button type="submit" class="m-l-small icon" [disabled]="formFactura.invalid">
-                        <img *ngIf="waitingResponse" class="regular-rotation" src="/assets/img/loader.svg" alt="">
+                    <button *ngIf="waitingResponse" type="button" class="m-l-small icon" [disabled]="formFactura.invalid">
+                        <img class="regular-rotation" src="/assets/img/loader.svg" alt="">
+                        Espere...
+                    </button>
+                    <button *ngIf="!waitingResponse" type="button" class="m-l-small icon" [disabled]="formFactura.invalid" (click)="addFactura()">
                         Añadir
                     </button>
                 </div>
