@@ -1,4 +1,4 @@
-<div class="container show">
+<div class="container" appFadeLoad>
     <div class="row">
         <div class="col-100">
             <div class="flex j-between a-center">
@@ -21,7 +21,7 @@
                             <button class="warning" routerLink="/actualizar-factura/{{factura.id}}">
                                 <img src="/assets/img/edit.svg" alt="">
                             </button>
-                            <button class="m-l-small danger" (click)="deleteFactura(factura.id)">
+                            <button class="m-l-small danger" (click)="toggleModal(factura.id)">
                                 <img src="/assets/img/trash.svg" alt="">
                             </button>
                         </td>
@@ -36,3 +36,6 @@
         </div>
     </div>
 </div>
+<app-modal *ngIf="showModal"
+           [texto]="'¿Está seguro de eliminar la factura?'"
+           (accion)="getAccion($event)"></app-modal>

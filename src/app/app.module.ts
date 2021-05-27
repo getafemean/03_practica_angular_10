@@ -10,6 +10,8 @@ import { ListadoFacturasComponent } from './facturas/listado-facturas/listado-fa
 import { SpinnerComponent } from './spinner/spinner.component';
 import { NumeroPipe } from './pipes/numero.pipe';
 import { ActualizarFacturaComponent } from './facturas/actualizar-factura/actualizar-factura.component';
+import { ModalComponent } from './modal/modal.component';
+import { FadeLoadDirective } from './fade-load.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { ActualizarFacturaComponent } from './facturas/actualizar-factura/actual
     ListadoFacturasComponent,
     SpinnerComponent,
     NumeroPipe,
-    ActualizarFacturaComponent
+    ActualizarFacturaComponent,
+    ModalComponent,
+    FadeLoadDirective
   ],
   imports: [
     BrowserModule,

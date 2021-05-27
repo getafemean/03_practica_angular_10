@@ -1,0 +1,14 @@
+<div class="overlay" appFadeLoad id="overlay" (click)="setAccion($event)">
+    <div class="modal">
+        <div class="modal-header">
+            <span id="close-btn" (click)="setAccion($event)">&#x2715;</span>
+        </div>
+        <div class="modal-body">
+            {{texto}}
+        </div>
+        <div class="modal-footer">
+            <button id="cancel-btn" class="outline" (click)="setAccion($event)">Cancelar</button>
+            <button id="accept-btn" class="m-l-small" (click)="setAccion($event)">Aceptar</button>
+        </div>
+    </div>
+</div>
